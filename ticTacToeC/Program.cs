@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Dusty Shaw
+// Created February 13, 2023
+using System;
 
 namespace TicTacToe
 {
@@ -17,23 +19,30 @@ namespace TicTacToe
             {
                 Console.WriteLine("TicTacToe");
                 // MakeBoard();
-                PrintBoard(places);
+                // PrintBoard(places);
+                Console.WriteLine(MakeBoard(places));
                 string playerChar = CheckTurn(turn);
+
                 Console.WriteLine($"Player {turn % 2}: place an {playerChar} in place (1-9)");
                 int position = Convert.ToInt32(Console.ReadLine());
+
                 places = PlayTurn(playerChar, position, places);
-                PrintBoard(places);
+                Console.WriteLine(MakeBoard(places));
                 endGame = CheckWin(places);
                 turn++;
             }
             Console.WriteLine($"player {(turn - 1) % 2} won!");
         }
-        public static string MakeBoard()
+        public static string MakeBoard(string[] places)
         {
-            return (@"
-                1 | 2 | 3
-                4 | 5 | 6
-                7 | 8 | 9");
+            return ($@"
+                {places[0]} | {places[1]} | {places[2]}
+                {places[3]} | {places[4]} | {places[5]}
+                {places[6]} | {places[7]} | {places[8]}");
+        }
+        public void updateBoard()
+        {
+
         }
         public static string CheckTurn(int turn)
         {
