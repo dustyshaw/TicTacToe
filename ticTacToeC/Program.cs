@@ -13,13 +13,12 @@ namespace TicTacToe
             string[] places = new string[9];
             for (int i = 0; i < places.Length; i++)
             {
-                places[i] = ".";
+                places[i] = $"{i + 1}";
             }
             while (endGame == false)
             {
                 Console.WriteLine("TicTacToe");
-                // MakeBoard();
-                // PrintBoard(places);
+
                 Console.WriteLine(MakeBoard(places));
                 string playerChar = CheckTurn(turn);
 
@@ -29,6 +28,7 @@ namespace TicTacToe
                 places = PlayTurn(playerChar, position, places);
                 Console.WriteLine(MakeBoard(places));
                 endGame = CheckWin(places);
+
                 turn++;
             }
             Console.WriteLine($"player {(turn - 1) % 2} won!");
@@ -64,6 +64,22 @@ namespace TicTacToe
         public static bool CheckWin(string[] places)
         {
             if (places[0] == places[1] && places[1] == places[2])
+            {
+                return true;
+            }
+            if (places[3] == places[4] && places[4] == places[5])
+            {
+                return true;
+            }
+            if (places[6] == places[7] && places[7] == places[8])
+            {
+                return true;
+            }
+            if (places[0] == places[4] && places[4] == places[8])
+            {
+                return true;
+            }
+            if (places[2] == places[4] && places[4] == places[6])
             {
                 return true;
             }
