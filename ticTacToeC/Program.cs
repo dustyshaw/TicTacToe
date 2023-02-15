@@ -1,6 +1,8 @@
 ﻿// Dusty Shaw
 // Created February 13, 2023
+// C:\Users\shust\AppData\Local\Temp\zcudqiwo..txt
 using System;
+using System.IO;
 
 namespace TicTacToe
 {
@@ -16,7 +18,6 @@ namespace TicTacToe
                 places[i] = $"{i + 1}";
             }
             Console.WriteLine("Welcome to TicTacToe");
-           
             while (endGame == false)
             {
                  Console.WriteLine(PrintBoard(places));
@@ -31,6 +32,7 @@ namespace TicTacToe
 
                 turn++;
                 Console.Clear();
+                RecordBoard(places, position);
             }
             Console.WriteLine($"player {((turn - 1) % 2)+1} won!");
         }
@@ -74,12 +76,17 @@ namespace TicTacToe
             }
             return false;
         }
-        //public static void PrintBoard(string[] places)
-        //{
-        //    for (int i = 0; i < places.Length; i++)
-        //    {
-        //        Console.Write(places[i]);
-        //    }
-        //}
+        public static void RecordBoard(string[] places, int lastPlay)
+        {
+            string path = "C:\\Users\\shust\\OneDrive\\Desktop\\ticTacToeC\\ticTacToeC\\records.txt";
+            StreamWriter streamWriter = new StreamWriter(path);
+            string str = "";
+            for (int i = 0; i < places.Length; i++)
+            {
+                str += places[i];
+            }
+            str += " " + lastPlay.ToString();
+            streamWriter.WriteAsync(str); 
+        }
     }
 }
