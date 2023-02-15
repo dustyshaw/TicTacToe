@@ -15,50 +15,39 @@ namespace TicTacToe
             {
                 places[i] = $"{i + 1}";
             }
+            Console.WriteLine("Welcome to TicTacToe");
+           
             while (endGame == false)
             {
-                Console.WriteLine("TicTacToe");
-
-                Console.WriteLine(MakeBoard(places));
+                 Console.WriteLine(PrintBoard(places));
                 string playerChar = CheckTurn(turn);
 
                 Console.WriteLine($"Player {turn % 2}: place an {playerChar} in place (1-9)");
                 int position = Convert.ToInt32(Console.ReadLine());
 
                 places = PlayTurn(playerChar, position, places);
-                Console.WriteLine(MakeBoard(places));
+                Console.WriteLine(PrintBoard(places));
                 endGame = CheckWin(places);
 
                 turn++;
+                Console.Clear();
             }
-            Console.WriteLine($"player {(turn - 1) % 2} won!");
+            Console.WriteLine($"player {((turn - 1) % 2)+1} won!");
         }
-        public static string MakeBoard(string[] places)
+        public static string PrintBoard(string[] places)
         {
             return ($@"
                 {places[0]} | {places[1]} | {places[2]}
                 {places[3]} | {places[4]} | {places[5]}
                 {places[6]} | {places[7]} | {places[8]}");
         }
-        public void updateBoard()
-        {
-
-        }
         public static string CheckTurn(int turn)
         {
-            if (turn % 2 == 0)
-            {
-                return "O";
-            }
-            else
-            {
-                return "X";
-            }
+            return turn % 2 == 0 ? "O" : "X";
         }
         public static string[] PlayTurn(string symbol, int position, string[] places)
         {
             places[position - 1] = symbol;
-
             return places;
         }
         public static bool CheckWin(string[] places)
@@ -85,12 +74,12 @@ namespace TicTacToe
             }
             return false;
         }
-        public static void PrintBoard(string[] places)
-        {
-            for (int i = 0; i < places.Length; i++)
-            {
-                Console.Write(places[i]);
-            }
-        }
+        //public static void PrintBoard(string[] places)
+        //{
+        //    for (int i = 0; i < places.Length; i++)
+        //    {
+        //        Console.Write(places[i]);
+        //    }
+        //}
     }
 }
