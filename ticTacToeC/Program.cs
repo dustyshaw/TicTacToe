@@ -45,7 +45,7 @@ namespace TicTacToe
         }
         public static string CheckTurn(int turn)
         {
-            return turn % 2 == 0 ? "O" : "X";
+            return turn % 2 == 0 ? "o" : "x";
         }
         public static string[] PlayTurn(string symbol, int position, string[] places)
         {
@@ -74,20 +74,50 @@ namespace TicTacToe
             {
                 return true;
             }
+            if (places[0] == places[3] && places[3] == places[6])
+            {
+                return true;
+            }
+            if (places[1] == places[4] && places[4] == places[7])
+            {
+                return true;
+            }
+            if (places[2] == places[5] && places[5] == places[8])
+            {
+                return true;
+            }
             return false;
         }
+
+        // When someone wins, the game is recorded.  Along with the string of all places,
+        // games are recorded with the position last played.  This position is the winning
+        // position.  The AI will then take this information, find similar games, and then
+        // play previous winning positions in order to either 1) block the oponent or 
+        // 2) win the game. 
         public static void RecordBoard(string[] places, int lastPlay)
         {
             string path = "C:\\Users\\shust\\OneDrive\\Desktop\\ticTacToeC\\ticTacToeC\\records.txt";
-            //StreamWriter streamWriter = new StreamWriter(path);
+
             string str = "";
             for (int i = 0; i < places.Length; i++)
             {
                 str += places[i];
             }
             str += " " + lastPlay.ToString();
-            File.WriteAllText(path, str);
-                
+            File.AppendAllText(path, str);
+            //var path = "C:\\Users\\shust\\OneDrive\\Desktop\\ticTacToeC\\ticTacToeC\\records.txt";
+
+            //using var sw = new StreamWriter(path);
+            //sw.WriteLine(str);
+        }
+
+        // AI will check any previously stored games for similiarities to the game being 
+        // currently played.  It will choose the most similar one, and play the winning position.
+        // The more the game is played, and the more records there are of games,
+        // the more intelligently the AI will choose. 
+        public static void CheckRecords(string[] places)
+        {
+
         }
     }
 }
