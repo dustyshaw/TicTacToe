@@ -23,17 +23,24 @@ namespace TicTacToe
             {
                  Console.WriteLine(PrintBoard(places));
                 string playerChar = CheckTurn(turn);
+                if (playerChar == "o")
+                {
+                    Console.WriteLine($"Player {turn % 2}: place an {playerChar} in place (1-9)");
+                    int position = Convert.ToInt32(Console.ReadLine());
 
-                Console.WriteLine($"Player {turn % 2}: place an {playerChar} in place (1-9)");
-                int position = Convert.ToInt32(Console.ReadLine());
-
-                places = PlayTurn(playerChar, position, places);
+                    places = PlayTurn(playerChar, position, places); 
+                    if (endGame == true) { RecordBoard(places, position); }
+                }
+                else
+                {
+                    aiTurn(places);
+                }
                 Console.WriteLine(PrintBoard(places));
                 endGame = CheckWin(places);
 
                 turn++;
                 Console.Clear();
-                if (endGame == true) { RecordBoard(places, position); }
+               
             }
             Console.WriteLine($"player {((turn - 1) % 2)+1} won!");
         }
@@ -149,7 +156,8 @@ namespace TicTacToe
 
         public static void aiTurn(string[] places)
         {
-
+            int place = CheckRecords(places);
+            PlayTurn("x", place, places);
         }
     }
 }
