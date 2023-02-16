@@ -139,18 +139,19 @@ namespace TicTacToe
             {
                 string line = lines[i];
                 char[] plays = new char[line.Length - 2];
-                for (int j = 0; j < plays.Length; j++)
+                for (int j = 0; j < line.Length - 5; j++)
                 {
                     if (str[j] == line[j])
                     {
                         score++;
                         if (score > bestPlay)
                         {
-                            bestPlay = plays[10];
+                            bestPlay = line[10] - 48;
                         }
                     } 
                 }
             }
+            Console.WriteLine("AI chooses: " + bestPlay);
             return bestPlay;
         }
 
