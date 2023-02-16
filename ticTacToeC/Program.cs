@@ -79,14 +79,15 @@ namespace TicTacToe
         public static void RecordBoard(string[] places, int lastPlay)
         {
             string path = "C:\\Users\\shust\\OneDrive\\Desktop\\ticTacToeC\\ticTacToeC\\records.txt";
-            StreamWriter streamWriter = new StreamWriter(path);
+            //StreamWriter streamWriter = new StreamWriter(path);
             string str = "";
             for (int i = 0; i < places.Length; i++)
             {
                 str += places[i];
             }
             str += " " + lastPlay.ToString();
-            streamWriter.WriteAsync(str); 
+            File.WriteAllText(path, str);
+                
         }
     }
 }
