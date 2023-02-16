@@ -18,7 +18,7 @@ namespace TicTacToe
             {
                 places[i] = $"{i + 1}";
             }
-            Console.WriteLine("Welcome to TicTacToe");
+            Console.WriteLine("Welcome to TicTacToe.  Play against the AI to see who can win!  The more you play, the smarter it gets");
             while (endGame == false)
             {
                  Console.WriteLine(PrintBoard(places));
@@ -155,9 +155,12 @@ namespace TicTacToe
             return bestPlay;
         }
 
+        // TO-DO: AI wants to choose the same place because it still thinks that it is the best move.
+
         public static void aiTurn(string[] places)
         {
             int place = CheckRecords(places);
+            
             PlayTurn("x", place, places);
         }
     }
