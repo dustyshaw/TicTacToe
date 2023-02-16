@@ -1,6 +1,7 @@
 ﻿// Dusty Shaw
 // Created February 13, 2023
-// C:\Users\shust\AppData\Local\Temp\zcudqiwo..txt
+// Play Tic Tac Toe against artificial intelligence! 
+
 using System;
 using System.IO;
 
@@ -32,7 +33,7 @@ namespace TicTacToe
 
                 turn++;
                 Console.Clear();
-                RecordBoard(places, position);
+                if (endGame == true) { RecordBoard(places, position); }
             }
             Console.WriteLine($"player {((turn - 1) % 2)+1} won!");
         }
@@ -104,7 +105,7 @@ namespace TicTacToe
                 str += places[i];
             }
             str += " " + lastPlay.ToString();
-            File.AppendAllText(path, str);
+            File.AppendAllText(path, str + Environment.NewLine);
             //var path = "C:\\Users\\shust\\OneDrive\\Desktop\\ticTacToeC\\ticTacToeC\\records.txt";
 
             //using var sw = new StreamWriter(path);
@@ -115,7 +116,38 @@ namespace TicTacToe
         // currently played.  It will choose the most similar one, and play the winning position.
         // The more the game is played, and the more records there are of games,
         // the more intelligently the AI will choose. 
-        public static void CheckRecords(string[] places)
+        public static int CheckRecords(string[] places)
+        {
+            string str = "";
+            for (int i = 0; i < places.Length; i++)
+            {
+                str += places[i];
+            }
+         
+            string path = "C:\\Users\\shust\\OneDrive\\Desktop\\ticTacToeC\\ticTacToeC\\records.txt";
+            string[] lines = File.ReadAllLines(path);
+            int score = 0;
+            int bestPlay = 0;
+            for (int i =0; i < lines.Length; i++)
+            {
+                string line = lines[i];
+                char[] plays = new char[line.Length - 2];
+                for (int j = 0; j < plays.Length; j++)
+                {
+                    if (str[j] == line[j])
+                    {
+                        score++;
+                        if (score > bestPlay)
+                        {
+                            bestPlay = plays[10];
+                        }
+                    } 
+                }
+            }
+            return bestPlay;
+        }
+
+        public static void aiTurn(string[] places)
         {
 
         }
